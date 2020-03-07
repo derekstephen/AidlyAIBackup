@@ -15,9 +15,16 @@ import pandas as pd
 import nltk
 nltk.download('stopwords')
 
-#Import data
-dataset = pd.read_csv("")
+# Import data
+df = pd.read_csv("./Data/MISSION.csv")
+
+# Convert to all lowercase
+df = df.apply(lambda x: x.astype(str).str.lower())
+
+# Remove unnecessary Columns
+df = df[['EIN', 'NAME', 'F9_03_PZ_MISSION' ]]
 
 # Load Stop Words
 stop_words = stopwords.words('english')
 
+# Filter Stop Words from Mission
