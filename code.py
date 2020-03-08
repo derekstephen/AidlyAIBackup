@@ -18,6 +18,8 @@ import re
 
 # First time download stop words
 nltk.download('stopwords')
+nltk.download('punkt')
+nltk.download('averaged_perceptron_tagger')
 
 # Load Stop Words
 stop_words = stopwords.words('english')
@@ -29,13 +31,16 @@ df = pd.read_csv("./Data/MISSION.csv")
 df = df[['EIN', 'NAME', 'F9_03_PZ_MISSION']]
 df = df.rename(columns={'F9_03_PZ_MISSION': 'MISSION'})
 
-# PREPARE DATA FOR POS Analysis
-# TODO: Remove punctuation, split words, remove stop words
+# Grab Mission statement to test
+text = df.iloc[7]
 
-# Convert to lowercase
-df = df.apply(lambda x: x.astype(str).str.lower())
+text["MISSION"] = text["MISSION"].lower()
 
-ps = PorterStemmer()
+sentences = nltk.sent_tokenize(text["MISSION"])
+sentences = [nltk.word_tokenize(sent) for sent in sentences]
+sentences = [nltk.pos_tag(sent) for sent in sentences]
+
+print(sentences)
 
 
 
