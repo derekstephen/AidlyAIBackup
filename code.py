@@ -8,6 +8,8 @@ Created on Sat Mar  7 02:55:49 2020
 
 # Load Libraries & Dependencies
 from nltk.corpus import stopwords
+from nltk.stem import PorterStemmer
+from nltk.tokenize import sent_tokenize, word_tokenize
 import pandas as pd
 import numpy as np
 import string
@@ -28,14 +30,13 @@ df = df[['EIN', 'NAME', 'F9_03_PZ_MISSION']]
 df = df.rename(columns={'F9_03_PZ_MISSION': 'MISSION'})
 
 # PREPARE DATA FOR POS Analysis
-# TODO: Make all text lowercase, remove punctuation, split words, remove stop words
+# TODO: Remove punctuation, split words, remove stop words
 
 # Convert to lowercase
 df = df.apply(lambda x: x.astype(str).str.lower())
 
+ps = PorterStemmer()
 
-
-print(df)
 
 
 
