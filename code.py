@@ -23,7 +23,19 @@ stop_words = stopwords.words('english')
 # Import data
 df = pd.read_csv("./Data/MISSION.csv")
 
-# Remove unnecessary Columns
+# Remove unnecessary columns and rename mission column
 df = df[['EIN', 'NAME', 'F9_03_PZ_MISSION']]
-
 df = df.rename(columns={'F9_03_PZ_MISSION': 'MISSION'})
+
+# PREPARE DATA FOR POS Analysis
+# TODO: Make all text lowercase, remove punctuation, split words, remove stop words
+
+# Convert to lowercase
+df = df.apply(lambda x: x.astype(str).str.lower())
+
+
+
+print(df)
+
+
+
