@@ -7,13 +7,8 @@ Created on Thu Mar 12 17:37:37 2020
 
 # Load Libraries & Dependencies
 from nltk.corpus import stopwords
-from nltk.stem import PorterStemmer
-from nltk.tokenize import sent_tokenize, word_tokenize
 import pandas as pd
-import numpy as np
-import string
 import nltk
-import re
 
 
 
@@ -27,4 +22,18 @@ stop_words = stopwords.words('english')
 
 # Import data
 df = pd.read_csv("./Data/MISSION.csv")
+
+
+df = df.apply(lambda x: x.astype(str).str.lower())
+
+
+
+
+
+
+
+
+
+
+
 
