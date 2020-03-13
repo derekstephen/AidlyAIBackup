@@ -34,22 +34,24 @@ df = pd.read_csv("./Data/MISSION.csv")
 df = df[['EIN', 'NAME', 'F9_03_PZ_MISSION']]
 df = df.rename(columns={'F9_03_PZ_MISSION': 'MISSION'})
 
+print("\n\n", nltk.word_tokenize(nltk.sent_tokenize(str(df.iloc[7]["MISSION"]).lower())), "\n\n")
+
 # Remove Stop Words
-df_missions = df["MISSION"].apply(lambda x: [item for item in str(x).lower().split() if item not in stop_words])
+df_missions = df["MISSION"].apply(lambda x: [item for item in nltk.word_tokenize(nltk.sent_tokenize(str(x).lower())) if item not in stop_words])
 df["MISSION"] = df_missions   
+
+
+
 
 # Grab Mission statement to test
 text = df.iloc[7]
-
-# Lowercase mission
-text["MISSION"] = text["MISSION"].lower()
 
 
 # END PREPARE DATA CODE
 
 # Tokenize and add POS Tags
-sentences = nltk.sent_tokenize(text["MISSION"])
-sentences = [nltk.word_tokenize(sent) for sent in sentences]
+#sentences = nltk.sent_tokenize(text["MISSION"])
+sentences = [nltk.word_tokenize(sent) for sent in text["MISSION"]]
 sentences = [nltk.pos_tag(sent) for sent in sentences]
 
 print(sentences)
