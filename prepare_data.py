@@ -23,12 +23,12 @@ stop_words = stopwords.words('english')
 # Import data
 df = pd.read_csv("./Data/MISSION.csv")
 
+# Make mission lowercase & Remove Stop Words
+df_missions = df["F9_03_PZ_MISSION"].apply(lambda x: [item for item in str(x).lower().split() if item not in stop_words])
+df["F9_03_PZ_MISSION"] = df_missions
 
-df = df.apply(lambda x: x.astype(str).str.lower())
-
-
-
-
+# Print Example Mission Statement
+print(df.iloc[0])
 
 
 
