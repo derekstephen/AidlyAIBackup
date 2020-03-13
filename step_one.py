@@ -11,11 +11,15 @@ from nltk import ngrams, FreqDist
 from nltk.stem import PorterStemmer
 from nltk.tokenize import sent_tokenize, word_tokenize
 
+from sklearn.feature_extraction.text import TfidfVectorizer
+
 import pandas as pd
 import numpy as np
 import string
 import nltk
 import re
+
+
 
 # PREPARE DATA CODE
 
@@ -38,7 +42,7 @@ print("\n\n", nltk.word_tokenize(nltk.sent_tokenize(str(df.iloc[7]["MISSION"]).l
 
 # Remove Stop Words
 df_missions = df["MISSION"].apply(lambda x: [item for item in nltk.word_tokenize(nltk.sent_tokenize(str(x).lower())) if item not in stop_words])
-df["MISSION"] = df_missions   
+df["MISSION"] = df_missions
 
 
 
@@ -65,3 +69,21 @@ for word in word_tokenize(text["MISSION"]):
     fdist[word.lower()] += 1
     
 print(fdist.most_common(4))
+
+# TF-IDF
+tfidf = TfidfVectorizer()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
