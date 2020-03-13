@@ -40,6 +40,7 @@ df = df.rename(columns={'F9_03_PZ_MISSION': 'MISSION'})
 
 # Grab Mission statement to test
 <<<<<<< HEAD
+<<<<<<< HEAD
 text = df.iloc[0]
 
 
@@ -53,6 +54,12 @@ text = df.iloc[7]
 
 text["MISSION"] = text["MISSION"].lower()
 
+=======
+text = df.iloc[7]
+
+text["MISSION"] = text["MISSION"].lower()
+
+>>>>>>> parent of fb68bbd... Update step_one.py
 sentences = nltk.sent_tokenize(text["MISSION"])
 sentences = [nltk.word_tokenize(sent) for sent in sentences]
 >>>>>>> parent of fb68bbd... Update step_one.py
@@ -64,11 +71,14 @@ print(sentences)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Word Frequency
 fdist = FreqDist()
 for word in word_tokenize(" ".join(df.iloc[0]["MISSION"])):
     fdist[word.lower()] += 1
     
 print(fdist.most_common(4))
+=======
+>>>>>>> parent of fb68bbd... Update step_one.py
 =======
 >>>>>>> parent of fb68bbd... Update step_one.py
