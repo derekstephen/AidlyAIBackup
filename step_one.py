@@ -31,16 +31,19 @@ stop_words = stopwords.words('english')
 # Import data
 df = pd.read_csv("./Data/MISSION.csv")
 
+df["OLD_MISSION"] = df["F9_03_PZ_MISSION"]
+df = df.apply(lambda x: x.astype(str).str.lower())
+
 # Make mission lowercase & Remove Stop Words
 df_missions = df["F9_03_PZ_MISSION"].apply(lambda x: [item for item in nltk.sent_tokenize(str(x).lower()) if item not in stop_words])
 df["F9_03_PZ_MISSION"] = df_missions
 
 # Remove unnecessary columns and rename mission column
-df = df[['EIN', 'NAME', 'F9_03_PZ_MISSION']]
+df = df[['EIN', 'NAME', 'F9_03_PZ_MISSION', 'OLD_MISSION']]
 df = df.rename(columns={'F9_03_PZ_MISSION': 'MISSION'})
 
 # Grab Mission statement to test
-text = df.iloc[7]
+text = df.iloc[0]
 
 
 # END PREPARE DATA CODE
@@ -57,7 +60,7 @@ print(sentences)
 
 # Word Frequency
 fdist = FreqDist()
-for word in word_tokenize(text["MISSION"]):
+for word in word_tokenize(" ".join(df.iloc[0]["MISSION"])):
     fdist[word.lower()] += 1
     
 print(fdist.most_common(4))
