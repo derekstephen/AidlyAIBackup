@@ -8,17 +8,13 @@ Created on Sat Mar  7 02:55:49 2020
 
 # Load Libraries & Dependencies
 from nltk.corpus import stopwords
-from nltk import ngrams, FreqDist
 from nltk.stem import PorterStemmer
 from nltk.tokenize import sent_tokenize, word_tokenize
-
 import pandas as pd
 import numpy as np
 import string
 import nltk
 import re
-
-# PREPARE DATA CODE
 
 # First time download stop words
 nltk.download('stopwords')
@@ -43,6 +39,7 @@ df = df[['EIN', 'NAME', 'F9_03_PZ_MISSION', 'OLD_MISSION']]
 df = df.rename(columns={'F9_03_PZ_MISSION': 'MISSION'})
 
 # Grab Mission statement to test
+<<<<<<< HEAD
 text = df.iloc[0]
 
 
@@ -51,6 +48,14 @@ text = df.iloc[0]
 # Tokenize and add POS Tags
 #sentences = nltk.sent_tokenize(text["MISSION"])
 sentences = [nltk.word_tokenize(sent) for sent in text["MISSION"]]
+=======
+text = df.iloc[7]
+
+text["MISSION"] = text["MISSION"].lower()
+
+sentences = nltk.sent_tokenize(text["MISSION"])
+sentences = [nltk.word_tokenize(sent) for sent in sentences]
+>>>>>>> parent of fb68bbd... Update step_one.py
 sentences = [nltk.pos_tag(sent) for sent in sentences]
 
 print(sentences)
@@ -58,9 +63,12 @@ print(sentences)
 
 
 
+<<<<<<< HEAD
 # Word Frequency
 fdist = FreqDist()
 for word in word_tokenize(" ".join(df.iloc[0]["MISSION"])):
     fdist[word.lower()] += 1
     
 print(fdist.most_common(4))
+=======
+>>>>>>> parent of fb68bbd... Update step_one.py
