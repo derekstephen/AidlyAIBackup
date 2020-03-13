@@ -24,5 +24,6 @@ password = input('Enter password: ')
 client = pymongo.MongoClient("mongodb+srv://aidly: " + password + "@aidly-testing-data-yi9tx.mongodb.net/test?retryWrites=true&w=majority")
 db = client.test
 
-db
+
+
 
