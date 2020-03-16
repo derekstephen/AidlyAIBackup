@@ -6,7 +6,7 @@ Created on Sat Mar  7 02:55:49 2020
 
 # Load Libraries & Dependencies
 from nltk.corpus import stopwords
-from nltk.stem import *
+from nltk.stem.snowball import SnowballStemmer
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 
@@ -33,8 +33,7 @@ stop_words = stopwords.words('english')
 df = pd.read_csv("./Data/MISSION.csv")
 
 # Split Mission to Sentences and then Words
-df_missions = df["F9_03_PZ_MISSION"].apply(lambda x: prep_text(str(x).lower()))
-df["MISSION"] = df_missions
+df["MISSION"] = df["F9_03_PZ_MISSION"].apply(lambda x: prep_text(str(x).lower()))
 
 # Flatten Separated Words to one List
 df["WORDS"] = df["MISSION"].apply(lambda column: [y for x in column for y in x])
@@ -45,6 +44,12 @@ df["WORDS"] = df["WORDS"].apply(lambda x: [item for item in x if item not in sto
 # END PREPARE DATA CODE
 
 # START STEP ONE CODE
+
+# Create Porter Stemmer
+stemmer = SnowballStemmer("english")
+
+# Stem mission statements
+df["STEMMER"] = df["WORDS"].apply(lambda x: [stemmer.stem(word) for word in x])
 
 
 
