@@ -19,7 +19,10 @@ import string
 import nltk
 import re
 
-
+def prep_text(mission):
+    sentences = nltk.sent_tokenize(mission)
+    sentences = [nltk.word_tokenize(sent) for sent in sentences]
+    return sentences
 
 # PREPARE DATA CODE
 
@@ -38,40 +41,36 @@ df = pd.read_csv("./Data/MISSION.csv")
 df = df[['EIN', 'NAME', 'F9_03_PZ_MISSION']]
 df = df.rename(columns={'F9_03_PZ_MISSION': 'MISSION'})
 
-print("\n\n", nltk.word_tokenize(nltk.sent_tokenize(str(df.iloc[7]["MISSION"]).lower())), "\n\n")
-
 # Remove Stop Words
-df_missions = df["MISSION"].apply(lambda x: [item for item in nltk.word_tokenize(nltk.sent_tokenize(str(x).lower())) if item not in stop_words])
+df_missions = df["MISSION"].apply(lambda x: prep_text(str(x).lower()))
 df["MISSION"] = df_missions
 
-
-
-
-# Grab Mission statement to test
-text = df.iloc[7]
-
+print()
 
 # END PREPARE DATA CODE
 
+# Grab Mission statement to test
+#text = df.iloc[8]
+
 # Tokenize and add POS Tags
 #sentences = nltk.sent_tokenize(text["MISSION"])
-sentences = [nltk.word_tokenize(sent) for sent in text["MISSION"]]
-sentences = [nltk.pos_tag(sent) for sent in sentences]
+#sentences = [nltk.word_tokenize(sent) for sent in text["MISSION"]]
+#sentences = [nltk.pos_tag(sent) for sent in sentences]
 
-print(sentences)
+#print(sentences)
 
 
 
 
 # Word Frequency
-fdist = FreqDist()
-for word in word_tokenize(text["MISSION"]):
-    fdist[word.lower()] += 1
+#fdist = FreqDist()
+#for word in word_tokenize(text["MISSION"]):
+#    fdist[word.lower()] += 1
     
-print(fdist.most_common(4))
+#print(fdist.most_common(4))
 
 # TF-IDF
-tfidf = TfidfVectorizer()
+#tfidf = TfidfVectorizer()
 
 
 
