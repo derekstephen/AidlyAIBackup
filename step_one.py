@@ -7,22 +7,17 @@ Created on Sat Mar  7 02:55:49 2020
 
 # Load Libraries & Dependencies
 from nltk.corpus import stopwords
-from nltk import ngrams, FreqDist
-from nltk.stem import PorterStemmer
-from nltk.tokenize import sent_tokenize, word_tokenize
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 
 import pandas as pd
-import numpy as np
-import string
 import nltk
-import re
 
 # PREPARE DATA CODE
 
 
 def prep_text(mission):
+    """Preps mission statement by tokenizing sentences and words."""
     sentences = nltk.sent_tokenize(mission)
     sentences = [nltk.word_tokenize(sent) for sent in sentences]
     return sentences
@@ -52,5 +47,7 @@ df["WORDS"] = df["WORDS"].apply(lambda x: [item for item in x if item not in sto
 # END PREPARE DATA CODE
 
 # Start Step One Code
+
+df[""]
 
 # End Step One Code
