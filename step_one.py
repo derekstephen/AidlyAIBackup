@@ -6,7 +6,7 @@ Created on Sat Mar  7 02:55:49 2020
 
 # Load Libraries & Dependencies
 from nltk.corpus import stopwords
-from nltk.stem.snowball import SnowballStemmer
+from nltk.stem import snowball
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 
@@ -46,11 +46,9 @@ df["WORDS"] = df["WORDS"].apply(lambda x: [item for item in x if item not in sto
 # START STEP ONE CODE
 
 # Create Porter Stemmer
-stemmer = SnowballStemmer("english")
+stemmer = snowball.SnowballStemmer('english')
 
 # Stem mission statements
 df["STEMMER"] = df["WORDS"].apply(lambda x: [stemmer.stem(word) for word in x])
-
-
 
 # END STEP ONE CODE
